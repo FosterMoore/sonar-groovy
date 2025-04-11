@@ -111,3 +111,28 @@ The converter does a pretty crude job converting CodeNarc's [APT] documentation
 into SonarQube rule descriptions.
 
 [APT]: https://maven.apache.org/doxia/references/apt-format.html
+
+## Install Plugin
+### Create the plugins dir if  it does not exist
+```bash
+kubectl exec -n sonarqube sonarqube-sonarqube-0 -c sonarqube -- bash -c 'mkdir -p "/opt/sonarqube/extensions/plugins"'
+```
+### Copy the plugin jar to the plugins dir
+```bash
+kubectl cp sonar-groovy-plugin/target/sonar-groovy-plugin-2025.1.0.jar sonarqube/sonarqube-sonarqube-0:"/opt/sonarqube/extensions/plugins/" -c sonarqube
+```
+
+### Verify the plugin jar
+```bash
+kubectl exec -n sonarqube sonarqube-sonarqube-0 -c sonarqube -- bash -c 'ls -al /opt/sonarqube/extensions/plugins/sonar-groovy-plugin-2025.1.0.jar'
+```
+
+### Restart the SonarQube pod
+```bash
+kubectl rollout restart statefulset sonarqube-sonarqube -n sonarqube
+```
+
+### check the logs
+```bash
+kubectl logs sonarqube-sonarqube-0 -c sonarqube -n sonarqube -f
+```
