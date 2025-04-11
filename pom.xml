@@ -24,6 +24,9 @@
         <sonar-plugin-api>11.3.0.2824</sonar-plugin-api>
         <sonar-plugin-api-impl>25.2.0.102705</sonar-plugin-api-impl>
         <revision>2025.2.0</revision>
+        <distribution.url>https://docker.io.fostermoore.com</distribution.url>
+        <releases.deployment.url>${distribution.url}/artifactory/product-mvn-releases</releases.deployment.url>
+        <snapshots.deployment.url>${distribution.url}/artifactory/product-mvn-snapshots</snapshots.deployment.url>
     </properties>
 
     <name>Sonar Groovy</name>
@@ -65,25 +68,30 @@
     </modules>
 
     <scm>
-        <connection>scm:git:git@github.com:forge-MAIF/sonar-groovy.git</connection>
-        <developerConnection>scm:git:git@github.com:forge-MAIF/sonar-groovy.git
+        <connection>scm:git:git@github.com:FosterMoore/sonar-groovy.git</connection>
+        <developerConnection>scm:git:git@github.com:FosterMoore/sonar-groovy.git
         </developerConnection>
-        <url>https://github.com/forge-MAIF/sonar-groovy/tree/main</url>
+        <url>https://github.com/FosterMoore/sonar-groovy/tree/main</url>
         <tag>HEAD</tag>
     </scm>
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/forge-MAIF/sonar-groovy/issues</url>
+        <url>https://github.com/FosterMoore/sonar-groovy/issues</url>
     </issueManagement>
     <ciManagement>
         <system>github-actions</system>
-        <url>https://github.com/forge-MAIF/sonar-groovy/actions</url>
+        <url>https://github.com/FosterMoore/sonar-groovy/actions</url>
     </ciManagement>
     <distributionManagement>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>${snapshots.deployment.url}</url>
+        </snapshotRepository>
         <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/forge-MAIF/sonar-groovy</url>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>${releases.deployment.url}</url>
             <uniqueVersion>false</uniqueVersion>
         </repository>
     </distributionManagement>
@@ -167,11 +175,11 @@
 
     <repositories>
         <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/forge-MAIF/sonar-groovy</url>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>${releases.deployment.url}</url>
             <snapshots>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
     </repositories>
